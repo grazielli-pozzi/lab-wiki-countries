@@ -1,9 +1,10 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 
 function NavBar() {
   return (
     <nav className="navbar bg-primary text-white">
-      <h1>WikiCountries</h1>
+      <Link to="/home">WikiCountries</Link>
     </nav>
   );
 }

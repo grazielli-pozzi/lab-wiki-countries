@@ -2,13 +2,11 @@ import React from 'react';
 
 import { Link } from 'react-router-dom';
 
-import countries from '../../countries.json';
-
 function CountryDetails(props) {
+  const {countries} = props;
   const c3code = props.match.params.country;
 
   const mountJSX = (country, borderCountries) => {
-    console.log(country);
     return (
       <div>
         <h1>{country.name.common}</h1>
@@ -49,7 +47,7 @@ function CountryDetails(props) {
       </li>
     ));
 
-  return displayCountry();
+  return countries.length < 1 ? <h1>Loading...</h1> : displayCountry();
 }
 
 export default CountryDetails;

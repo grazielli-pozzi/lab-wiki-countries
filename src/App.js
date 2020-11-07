@@ -6,6 +6,7 @@ import axios from 'axios';
 import NavBar from './components/NavBar/NavBar';
 import CountriesList from './components/CountriesList/CountriesList';
 import CountryDetails from './components/CountryDetails/CountryDetails';
+import Home from './components/Home/Home';
 
 import { Switch, Route } from 'react-router-dom';
 
@@ -16,9 +17,10 @@ class App extends React.Component {
 
   componentDidMount() {
     axios.get('https://countries.tech-savvy.tech/countries')
-    .then((res) => {
+    .then(res => {
       this.setState({countries: res.data});
-    });
+    })
+    .catch(err => console.log(err));
   }
 
   render() {
@@ -28,7 +30,8 @@ class App extends React.Component {
         <div className="d-flex">
           <CountriesList countries={this.state.countries} />
           <Switch>
-            <Route exact path="/detail/:country" component={CountryDetails} />
+            <Route exact path="/detail/:country" render={(routeProps) => <CountryDetails {...routeProps} countries={this.state.countries} />} />
+            <Route exact path="/home" component={Home} />
           </Switch>
         </div>
       </div>
